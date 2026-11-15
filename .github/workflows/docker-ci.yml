@@ -1,0 +1,25 @@
+name: Docker Build and Verify
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t tasktrack-api:test .
+
+      - name: Run container and verify health endpoint
+        run: |
+          docker run -d -p 3000:3000 --name test-container tasktrack-api:test
+          sleep 5
+          curl -f http://localhost:3000/health
+          docker stop test-container
+          docker rm test-container
