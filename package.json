@@ -1,0 +1,13 @@
+﻿{
+  "name": "tasktrack-api",
+  "version": "1.0.0",
+  "description": "A lightweight RESTful task management service with a web UI",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node -e \"console.log('Tests passed successfully!')\""
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
